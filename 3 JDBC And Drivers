@@ -1,0 +1,26 @@
+What is JDBC ???
+
+JDBC(Java DataBase Connectivity):
+-->The process of interacting with the database from Java Applications is called as JDBC.
+
+-->JDBC is an API,which will provide very good predefined library to connect with database from JAVA Applications in order to perform the basic database operations.
+
+-->In case of JDBC Applications we will define the database logic in Java application and we will send a Java represented database logic to Database Engine.But database engine is unable to execute the Java represented database logic,it should required the database logic in Query Language Representations.
+
+-->In the above context, to execute JDBC applications we should require a conversion
+mechanism to convert the database logic from Java representations to Query language representations and from Query language representations to Java representations.
+
+-->In the above situation the required conversion mechanisms are available in the form
+of a software called as "Driver".
+
+
+Driver:
+-->Driver is an interface existed between Java application and database to map Java API calls to Query language API calls and Query language API calls to Java API calls.
+
+-->To provide driver as a product Sun MicroSystems has provided Driver as an interface.
+And Sun MicroSystems lets the database vendors to provide implementation classes to the driver interface as part of their database software's.
+
+-->If we want to use Drivers in JDBC applications then we have to get Driver implementation 
+from the respective database software's.
+
+------------------------------------------------------------------------------------------
