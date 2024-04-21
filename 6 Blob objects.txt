@@ -1,0 +1,100 @@
+BLOB (Binary Large Object):
+Up to now in Jdbc applications, we are able to interact with the database in order to insert a record, 
+retrieve a record and so on with the varchar data or number data and so on.
+As per the application requirement if we want to insert an image or a document in the database 
+table then Oracle provided datatypes numbers, varchar are not sufficient, we have to use BLOB and 
+CLOB datatypes provided by Oracle.
+The main purpose of the BLOB and CLOB datatypes is to represent large volumes of binary data and 
+large volumes of character data in a database table.
+To insert large volumes of binary data (an image) on to the database table we have to use the 
+following steps.
+Step 1: Prepare a table at database with blob data type.
+Ex: create table emp_details(eno number, image blob);
+Step 2: Represent an image file in the form of File class object.
+Ex: File f=File(“Desert.jpg”);
+Step 3: Get File class object content in the form of FileInputStream.
+Ex: FileInputStream fis=new FileInputStream(f);
+Step 4: Create preparedStatement object with insert SQL query format.
+Ex: PreparedStatement pst=con.prepareStatement(“insert into emp_details values(?,?)”)
+
+Step 5: Set BinaryStream to the blob type positional parameter in PreparedStatement.
+
+To set a BinaryStream with the blob type positional parameter we have to use thefollowing method 
+from PreparedStatement.
+public void setBinaryStream(int param_index, InputStream is, int length);
+Ex: pst.setBinaryStream(2, fis, (int)f.length());
+Step 6: Execute PreparedStatement.
+Ex: pst.executeUpdate();
+JdbcApp40:
+import java.sql.*;
+import java.io.*;
+public class JdbcApp40
+{
+public static void main(String[] args) throws Exception
+{
+Class.forName("oracle.jdbc.driver.OracleDriver");
+Connection
+con=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","system","manager");
+File f=new File("Desert.jpeg");
+FileInputStream fis=new FileInputStream(f);
+PreparedStatement pst=con.prepareStatement("insert into employee values(?,?)");
+pst.setInt(1,105);
+pst.setBinaryStream(2,fis,(int)f.length());
+pst.executeUpdate();
+System.out.println("Employee Image inserted Successfully");
+con.close();
+}
+}
+Step 1: Prepare ResultSet object with blob data.
+Ex: ResultSet rs=st.executeQuery(“select * from emp_details“);
+Step 2: Read normal data from ResultSet object.
+Ex: rs.next();
+int eno=rs.getInt(1);
+Step 3: Get BinaryStream from blob datatype available at ResultSet object
+To get a BinaryStream from blob type parameter available at ResultSet object we have to
+use the following method.
+public InputSteram getBinaryStream(int param_index)
+Ex: InputSteram is=rs.getBinaryStream(2);
+Step 4: Prepare the target resource to hold up the retrieved blob data by using
+FileOutputStream.
+Ex: FileOutputStream fos=new FileOutputStream(“myimage.jpeg“)
+
+Step 5: Read bit by bit from InputStream and write the same bit by bit on
+FileOutputStream to store the retrieved data on target file.
+
+
+Ex: int i=read();
+while(i!=-1) {
+fos.write(i);
+i=is.read();
+}
+JdbcApp41:
+import java.sql.*;
+import java.io.*;
+public class JdbcApp41{
+public static void main(String[] args) throws Exception{
+Class.forName("oracle.jdbc.driver.OracleDriver");
+Connection
+con=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","system","durga"
+);
+Statement st=con.createStatement();
+ResultSet rs=st.executeQuery("select * from employee");
+rs.next();
+System.out.println("Employee Id....."+rs.getInt(1));
+InputStream is=rs.getBinaryStream(2);
+FileOutputStream fos=new FileOutputStream("myimage.jpg");
+int i=is.read();
+while (i != -1)
+{
+fos.write(i);
+i=is.read();
+}
+System.out.println("Image created Successfully with the name
+myimage.jpeg");
+
+fos.close();
+con.close();
+}
+}
+
+

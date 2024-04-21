@@ -6,8 +6,11 @@ Steps To design Jdbc Applications : -
 2)Establish the connection between Java Application.
 3)Prepare either Statement or preparedStatement or CallableStatement Objects.
 4)Write and execute SQL Queries.
-5)close the connection
+5) process results
+6)close the connection
 
+
+Look for examples.
 
 
 
