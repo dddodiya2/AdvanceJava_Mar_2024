@@ -1,0 +1,152 @@
+Designing web application using servlets
+>> Directory Structure for the web project
+>> Understand Deployment descriptor
+>> Create web resources html, jsps, servlets, etc
+>> Start the server
+>> Hitting the web application for a resources.
+
+
+>> Directory Structure for the web project
+There is a specific directory structure that must be follwed at server machine.
+
+When we install Tomcat server automatically Tomcat7.0 folder will be created. 
+
+1. Themes: To store .css files(cascade style sheet) to generate reports.
+2. Images:To store logos of the organizations, background sceneries and so on in the form
+of .jpg, .jpeg, .gif files.
+3. Literature:To store documentations in the form of .doc, .docex and so on.
+4. src(Source code): It can be used to store all the source files like Java files.
+5. Along with all these folders it is possible to provide some static resources directly like
+.html files and dynamic resources like .jsp files.
+6. WEB-INF folder will include
+1. web.xml: This xml file can be used to store the metadata about the web application
+required by the container to perform a particular action.
+2. lib: It is able to manage jar files which are required by the server side components.
+3. classes: It will include .class files of servlets, filters, listeners and so on.
+
+
+*****************Deployment Descriptor or web.xml file:*******************************
+Deployment Descriptor is web.xml file, it can be used to provide the metadata about the present web application required by the container in order to perform a particular server side action.
+
+In web applications, web.xml file include the following configuration details w.r.t the web application
+1. Welcome Files Configuration
+2. Display Name Configuration
+3. Servlets Configuration
+4. Filters Configuration
+5. Listeners Configuration
+6. Context Parameters Configuration
+7. Initialization Parameters Configuration
+8. Session Time Out Configuration
+9. Load On Startup Configuration
+10. Error Page Configuration
+11. Tag Library Configuration
+12. Security Configuration
+
+
+
+In general in web applications, we will deploy the servlets .class files under classes folder of
+the web application directory structure i.e. private area.
+If we deploy any resource under private area then client is unable to access that resource
+through its name, client is able to access that resource through alias names or locators. In
+case of servlets, client is able to access servlet classes through the locators called as URL
+Patterns.
+
+If we provide multiple number of servlets under classes folder and we provide a particular
+request to a particular servlet available under classes folder with an URL pattern then
+container should require mapping details between URL patterns and servlets class names as
+metadata in order to identify w.r.t servlet.
+In the above context, to provide the required metadata to the container we have to
+provide servlet configuration in web.xml file. To provide servlet configuration in web.xml file
+we have to use the following xml tags.
+
+<web-app>
+--------
+<servlet>
+<servlet-name>logical_name</servlet-name>
+<servlet-class>fully qualified name of servlet</servlet-class>
+</servlet>
+<servlet-mapping>
+<servlet-name>logical_name</servlet-name>
+<url-pattern>urlpattern_name</url-pattern>
+</servlet-mapping>
+
+
+<servlet>
+<servlet-name>loginservlet</servlet-name>
+<servlet-class>com.dss.login.LoginServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+<servlet-name>loginservlet</servlet-name>
+<url-pattern>/login</url-pattern>
+</servlet-mapping>
+</web-app>
+
+
+
+
+In servlet configuration, there are 3 ways to define URL patterns.
+1. Exact Match Method
+In Exact Match Method, we have to define an URL pattern in web.xml file, it must be
+prefixed with forward slash(“/”) and pattern name may be anything.
+Ex: <url-pattern>/abc/xyz</url-pattern>
+If we define any URL pattern with exact match method then to access the respective
+resource we have to provide an URL pattern at client address bar along with URL, it must be
+matched with the URL pattern which we defined in web.xml file.
+
+
+
+2. Directory Match Method
+In Directory Match Method, we have to define an URL pattern in web.xml file, it must be
+prefixed with forward slash(“/”) and it must be terminated with “*”.
+Ex: <url-pattern>/abc/*</url-pattern>
+
+
+3. Extension Match Method
+In Extension Match Method, we have to define an URL pattern in web.xml file, it must be
+prefixed with “*” and it must be terminated with a particular extension.
+Ex: <url-pattern>*.do</url-pattern>
+
+
+
+
+**************Create or prepare web resources*********************
+
+Writing actual code
+if we want to prepare servlets in our web applications then we have to use some predefined library provided by Servlet API.
+To design servlets Servlet API has provided the following predefined library as part of
+javax.servlet package and javax.servlet.http package.
+Servlet (I)
+GenericServlet (AC)
+HttpServlet(AC)
+
+Three ways to create our own servlet in web application :-
+A. Implementing Servlet interface:
+In this approach, if we want to prepare servlet then we have to take an user defined class which must implement Servlet interface.
+public class MyServlet implements Servlet
+{ --------
+-------- }
+
+
+B. Extending GenericServlet abstract class:
+In this approach, if we want to prepare servlet then we have to take an user defined class
+as a subclass to GenericServlet abstract class.
+public class MyServlet extends GenericServlet
+{ --------
+-------- }
+
+C. Extending HttpServlet abstract class:
+In this approach, if we want to prepare servlet then we have to take an user defined class
+as a subclass to HttpServlet abstract class.
+public class MyServlet implements HttpServlet
+{ --------
+-------- }
+
+
+
+***** Start the Server:****
+Istall and run the apache tomcat server using eclipse.
+
+
+*************Access the Web Application:***************
+1. Open web browser and type the complete URL on address bar.
+http://localhost:8080/app1/servlet

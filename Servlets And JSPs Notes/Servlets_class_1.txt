@@ -1,0 +1,162 @@
+Servlets And Jsps : (Advanaced Java )
+
+
+
+Servlet is the server side technology designed on the basis of java technology.
+Java technology is a Thread based technology, it will make servlets as Thread based technology.
+If we deploy any servlet application at server then for every client request servlet container
+will generate a separate thread on the respective servlet object.
+In the above context, if we increase number of requests even container will create number
+of threads instead of processes.
+When compared to process, thread is light weight, to handle multiple number of requests
+i.e. thread server machine may not get burden, it may provide quick responses for the
+client request, it may increase the performance of server side application.
+
+
+Why JSp when we have Servlets ????
+1.
+If we want to design web applications by using Servlets we must require very good java knowledge.
+To design web applications by using Jsp technology it is not required to have java knowledge, it is sufficient to have presentation/design skills.
+
+Note: The main intention to introduce Jsp technology is to reduce java code as much as possible in web applications.
+
+2.
+In web applications, we will prefer to use Servlets to pick up the request and process the request 
+But we will prefer to use Jsp’s to generate dynamic response to the client with very good
+look and feel.
+Note: In web applications, we will utilize Servlets to provide controller logic, integration
+logic, validation logic, implementing business logic and so on. But we will prefer to use Jsp
+technology only to provide presentation part.
+
+3. 
+In case of Servlets, we are unable to separate both presentation logic and business logic,
+but in case of Jsp’s we are able to separate presentation logic and business logic because in
+Jsp pages we are able to use html tags to prepare presentation logic and we are able to use
+Jsp tags to prepare business logic.
+
+
+4. If we perform any modifications on the existed Servlets then we have to perform
+recompilation and reloading on to the server explicitly.
+If we perform any modifications on the existed Jsp’s then it is not required to perform
+recompilation and reloading because Jsp pages are auto compiled and auto loaded.
+
+5. If we want to design any web application on the basis of MVC architecture then we have
+to use a servlet as controller and a set of Jsp pages as view part.
+
+
+
+
+there are three major components in client-server
+architecture.
+1. Client
+2. Protocol
+3. Server
+
+
+1. Client:
+The main purpose of the Client in client-server architecture is to send request to the server and to set the responses from server.
+To send request and to set response from server we need to use a tool at client machine called as Browser. In client-server application browser is acting as client.
+
+To access a particular resource available at server from client browser we need to specify a particular string at browser address bar called URI.
+There are two types of URI’s
+1. URL 2. URN
+
+URIis a string specification provided at client address bar, it can be used to refer a
+particular resource available at server machine.
+URL is a string specification provided at client address bar, it can be used to refer a
+particular resource available at server machine through its locator.
+URN is a string specification, it can be used to refer a particular resource available at
+server machine through its logical name.
+
+Note 1: In case of servlets, locator is an URL pattern defined in web.xml file.
+Note 2: In case of servlets, logical name is a name specified along with <servlet-name>
+tag in web.xml file.
+Note 3: Almostall the servers are able to accept URL kind of request, but almost all the
+servers are not accept URN kind of request.
+If we want to provide URL at client address bar then we have to use the following syntax.
+Protocol_Name://Server_IP_Address:Server_Port_No/Application_Context/Resource_Name[
+Query_String]
+Ex: http://121.120.92.98.8080/loginapp/logon?uname=abc&upwd=abc
+Here Query_String, i.e. uname=abc&upwd=abc is optional.
+
+
+
+2. Protocol:
+The main job of the Protocol in client-server architecture is to carry the request data from
+client to server and to carry the response data from server to client.
+
+Protocol is a set of rules and regulations, which can be used to carry the data from one machine to another machine over the Network.
+
+Ex: TCP/IP, FTP, HTTP, SMTP, ARP, RARP........
+In general in web applications, we will use http protocol to send request from client to
+server and to set response from server to client.
+
+
+HTTP Protocol :- 
+In web applications, to transfer the data between client and server we require a
+protocol, it should be
+1. A Connectionless Protocol
+2. A Stateless Protocol
+3. A compatible Protocol to carry hypertext data.
+
+Where Connectionless Protocol is protocol, it should not require a physical connection, but
+require a logical connection to carry the data.
+
+Where Stateless Protocol is a protocol, which should not remember previous request data at
+the time of processing the later request.
+
+In general in client server application, request data will be transferred from client to server
+in the form of hypertext data and the response data will be transferred from server to client
+in the form of hypertext data so that we require a Compatible Protocol to carry hypertext
+data between client and server.
+
+
+In web applications, with http protocol we are able to specify different types of requests
+at client browser. The above flexibility is possible for the http protocol due to the availability
+of 7 number of http methods called as BIG 7 http methods.
+Http protocol has provided the following http methods along with http1.0 version.
+1. GET
+2. POST
+3. HEAD
+Http protocol has provided the following http methods as per http1.1 version.
+1. OPTIONS
+2. PUT
+3. TRACE
+4. DELETE
+
+
+
+Responses to the request :- 
+Responses have status code associated with them.
+Status Codes:
+
+In web applications, the main purpose of the status codes is to give the status of the
+request processing to the client.
+Http1.1 version has provided all the status codes in the form of number representations.
+As per the web application requirement http1.1 version has provided the following status
+codes.
+1xx -- 100 to 199 -- Informational status codes
+2xx -- 200 to 299 -- Success related status codes
+3xx -- 300 to 399 -- Redirectional status codes
+4xx -- 400 to 499 -- Client side error status codes
+5xx -- 500 to 599 -- Server side error status codes
+In general in web applications, when we send a request from client to server, server will
+identify the requested resource, execute it and generate dynamic response to client.
+
+
+
+3. Server:
+The main purpose of the server in client server applications is to pick up the request from
+client, identify the requested resource, generate the dynamic response and dispatch
+dynamic response to client.
+
+Note: Servlet is a program available at server machine, it is not capable to pick up the
+request and dispatch response to client, if server execute servlet program then some
+dynamic response will be generated.
+
+Examples of Servers: Apache Tomcat, BEA Weblogic, IBM Websphere, Macromedia JRun,
+SUN Sunone, J2EE, GlassFish and so on.
+There are 2 types of servers to execute enterprise applications.
+1. Web Servers
+2. Application Servers
+
