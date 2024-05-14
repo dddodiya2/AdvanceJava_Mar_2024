@@ -1,0 +1,16 @@
+Core Java --  Collections, Multithreading , Databases, Internet(Servlets/JSPs), 
+
+Advanced Java -- JDBC, Servlets, JSPs
+
+
+JDBC - Java DataBase Connectivity.
+
+Temporary - int x;, String name;,..., cache 
+
+Permanent Storage Areas- 
+FileSysytem -- 
+
+DBMS - Database Management System
+RDBMS -- Relational DBMS
+
+Employee - Name, age, Salary, Dept, Address, Pincode, City.

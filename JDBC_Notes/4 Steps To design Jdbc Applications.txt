@@ -1,0 +1,129 @@
+Steps To design Jdbc Applications : - 
+
+--> Start a Database server.
+
+1)Load and register the Driver.
+2)Establish the connection between Java Application.
+3)Prepare either Statement or preparedStatement or CallableStatement Objects.
+4)Write and execute SQL Queries.
+5) process results
+6)close the connection
+
+
+Look for examples.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1)Load and Register the Driver :- 
+In general Driver is an interface provided by Sun Microsystems and whose 
+implementation classes are provided by the Database Vendors as part of their Database 
+Softwares.
+-->To load and Register the Driver first we have to make available Driver implementation to 
+JDBC application.For this we have to set classpath environment variable to the location
+Where we have Driver implementation class.
+-->If we want to use Type1 Driver provided by Sun MicroSystems in our JDBC applications then it 
+is not required to set classpath environment variable because Type1 Driver was provided by Sun 
+MicroSystems as part of Java Software in the form ofsun.jdbc.odbc.JdbcOdbcdriver
+-->If we want to use Type1 Driver in our JDBC applications then before loading we have to 
+Configure the Microsoft product odbc Driver
+-->To configure Microsoft product odbc Driver we have to use the following path.
+To setting DSN:-
+Start
+Control Panel
+System and Security
+Administrative Tools
+Data Sources (ODBC)
+user DSN
+Click on Add button
+Select Microsoft ODBC for the Oracle
+Click on Finish button
+Provide DSN name (provide any name)
+Click on OK
+-->To load and register Driver in our Jdbc applications we have to use the following method from class
+‘Class’
+
+Public static Class forName(String class_Name)
+Eg:Class.forName(“sun.jdbc.odbc.JdbcOdbcDriver”);
+-->When JVM encounter the above instruction JVM will pickup the parameter that is JDBCOdbcDriver
+Class name and JVM will search for its .class file in the current location,if it is not available then JVM will 
+search for it in Java predefined library.
+-->If JVM identify JDBCODBCDriver.class file in Java pre-defined library(rt.jar) then JVM will load
+JdbcOdbcDriver class byte code to the memory.
+-->At the time of loading JdbcOdbcDriver class byte code to the memory JVM will execute a static block,
+As part of this JVM wiil execute a method call likeDriverManager.registerDriver(--); by the execution
+of registerDriver() method only JDBCOdbcDrvier will be available to our Jdbc applications.
+-->In case of Type1 Driver if we use either Jdbc 4.0 version or Jdk 6.0 version then it is optional
+To perform loading and register the driver step because JVM will perform Drvier registration 
+automatically at the time of establishing the connection between Java application and Database.
+NOTE:To prepare Jdbc applications Java API has provided the required pre-defined library in the form
+of java.sql package so that we have to import this package in our Java file.
+Import java.sql.*;
+-->java.sql package includes the following pre-defined library to design Jdbc applications.
+java.sql package includes the following predefined library:-
+I-----interface C-------class
+
+1. Driver (I)
+2. DriverManager (C)
+3. Connection (I)
+4. Statement (I)
+5. PreparedStatement (I)
+6. ResultSet (I)
+7. ResultSetMetaData (I)
+8. DatabaseMetaData (I)
+9. Savepoint(i)
+
+
+
+
+2)Establish the Connection between Java application and Database: 
+-->To establish the connection between Java application and Database we have to use the following
+Method from DriverManager class.
+Public static Connection getConnection(String url,String db_user_name,String db_password)
+Ex:Connection con=DriverManager.getConnection(“jdbc:odbc:dsnName”,”system”,”durga”);
+-->When JVM encounter the above instruction JVM will access getConnection method,as part
+of the getConnection method JVM will access connect() method to establish virtual socket connection 
+Between Java application and database as per the url which we provided.
+-->wher getConnection() method will take three parameters
+1.Driver URL
+2.Database username
+3.Database password
+-->In general from Driver to Driver Driver class name and Driver url will varied.
+-->If we use Type1 Driver then we have to use the following Driver class name and URL
+d-class : sun.jdbc.odbc.JdbcOdbcDriver
+url :jdbc:odbc:dsnName
+-->In general all the Jdbc Drivers should have an url with the following format.
+main-protocol: sub-protocol
+-->where main-protocol name should be Jdbc for each and every Driver but the sub protocol name 
+should be varied from Driver to Driver
+
+
+Q) In Jdbc applications getConnecction() method will establish the connection between Java application
+and Database and return connection object but connection is an interface how it is possible to
+Create connection object?
+Ans:In general in Java technology we are unable to create objects for the interfaces directly,if we want 
+to accommodate interface data in the form of objects then we have to take either an implementation 
+class or Anonymous Inner class.
+-->If we take implementation class as an alternative then it may allow its own data a part from the data
+Declared in interface and implementation class object should have its own identity instead of interface 
+identity.
+-->If we want to create an object with only interface identity and to allow only interface data we have to 
+use Anonymous inner class as an alternative.
+-->In jdbc applications getConnection() method will return connection object by returning anonymous
+Inner class object of connection interface.
+NOTE: To create connection object taking an implementation class or anonymous inner class is 
+Completely depending on the Driver Implementation
+
