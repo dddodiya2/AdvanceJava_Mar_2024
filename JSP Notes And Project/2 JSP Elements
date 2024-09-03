@@ -1,0 +1,266 @@
+In web applications to design Jsp pages we have to use the following elements.
+
+There are 3 main elements in JSP :- 
+A. JSP Directives
+B. JSP Scripting Elements
+C. JSP Actions
+
+
+
+
+A. JSP Directives
+To provide Jsp Directives in Jsp pages we have to use the following syntaxes.
+1. Jsp-Based Syntax:
+<%@Directive_name [attribute-list]%>
+Ex: <%@page import=”java.io.*”%>
+2. XML-Based Syntax:
+<jsp:directive.directiveName[attr ibute-list]%/>
+Ex: <jsp:directive.page import=”java.io.*”/>
+
+
+There are 3 types of Directives in Jsp technology.
+1. Page Directive
+2. Include Directive
+3. Taglib Directive
+
+1. Page Directive:
+In Jsp technology, Page Directive can be used to define the present Jsp page 
+characteristics like to define import statements, specify particular super class to the 
+translated servlet, to specify metadata about present Jsp pages and so on.
+Syntax 1:<%@page [attribute-list]%>
+Syntax 2:<jsp:directive.page [attribute-list]/>
+Where attribute-list in Jsp page directive may include the following list.
+1. language
+2. contentType
+3. import
+4. extends
+5. info
+6. buffer
+7. autoFlush
+8. errorPage
+9. isErrorPage
+10. session
+11.isThreadSafe
+12.isELIgnored
+
+1. language:
+ This attribute can be used to specify a particular scripting language to use scripting 
+elements.
+ The default value of this attribute is java.
+Ex: <%@page language=”java”%>
+
+2. contentType:
+ This attribute will take a particular MIME type in order to give an intimation to the client 
+about to specify the type of response which Jsp page has generated.
+Ex: <%@page contentType=”text/html”%>
+
+3. import:
+ This attribute can be used to import a particular package/packages into the present Jsp 
+pages.
+Ex:<%@page import=”java.io.*”%>
+ If we want to import multiple number of packages into the present Jsp pages then we 
+have to use either of the following 2 approaches.
+Approach 1:
+ Specify multiple number of packages with comma(,) as separator to a single import 
+attribute.
+Ex: <%@page import=”java.io.*,java.util.*,java.sql.*”%>
+Approach 2:
+ Provide multiple number of import attributes for the list of packages.
+Ex: <%@page import=”java.io.*” import=”java.util.*” import=”java.sql.*”%>
+Note: Among all the Jsp page attributes only import attribute is repeatable attribute, no 
+other attribute is repeatable.
+The default values of this attribute are java.lang, javax.servlet, javax.servlet.http, 
+javax.servlet.jsp.
+
+
+4. extends:
+ This attribute will take a particular class name, it will be available to the translated 
+servlet as super class.
+Ex: <%@page extends=”com.dss.MyClass”%>
+Where MyClass should be an implementation class to HttpJspPage interface and should be a 
+subclass to HttpServlet.
+ The default value of this attribute is HttpJspBase class
+ 
+ 
+5. info:
+ This attribute can be used to specify some metadata about the present Jsp page.
+Ex: <%@page info=”First Jsp Application”%>
+ If we want to get the specified metadata programmatically then we have to use the 
+following method from Servlet interface.
+public String getServletInfo()
+ The default value of this attribute is Jasper JSP2.2 Engine.
+
+
+6. buffer: 
+This attribute can be used to specify the particular size to the buffer available in 
+JspWriter object.
+Note: Jsp technology is having its own writer object to track the generated dynamic 
+response, JspWriter will provide very good performance when compared with PrintWriter in 
+servlets.
+Ex: <%@page buffer=”52kb”%>
+ The default value of this attribute is 8kb
+ 
+ 
+7. autoFlush:
+ It is a boolean attribute, it can be used to give an intimation to the container about to 
+flush or not to flush dynamic response to client automatically when JspWriter buffer filled 
+with the response completely.
+ If autoFlush attribute value is true then container will flush the complete response to the 
+client from the buffer when it reaches its maximum capacity.
+ If autoFlush attribute value is false then container will raise an exception when the buffer 
+is filled with the response.
+Ex: <%@page buffer="52kb" autoFlush="true"%>
+<html>
+<body bgcolor="lightgreen">
+<center><b><font size="7" color="red"><br><br>
+<%
+for(int i=0; i<10000000; i++) {
+out.println("RAMA");
+ }
+ %>
+</font></b></center></body>
+</html>
+ In the above piece of code, if we provide autoFlush attribute value false then container 
+will raise an exception like 
+ org.apache.jasper.JasperException:An exception occured processing JSP page/first.jsp at 
+line:9
+root cause: java.io.IOException:Error:Jsp Buffer Overflow.
+Note: if we provide 0kb as value for buffer attribute and false as value for autoFlush 
+attribute then container will raise an exception 
+likeorg.apache.jasper.JasperException:/first.jsp(1,2) jsp.error.page.badCombo
+ The default value of this attribute is true
+ 
+ 
+ 
+ 8. errorPage:
+ This attribute can be used to specify an error page to execute when we have an 
+exception in the present Jsp page.
+Ex: %@page errorPage=”error.jsp”%
+
+
+
+9. isErrorPage:
+It is a boolean attribute, it can be used to give an intimation to the container about to allow 
+or not to allow exception implicit object into the present Jsp page.
+ If we provide value as true to this attribute then container will allow exception implicit 
+object into the present Jsp page.
+ If we provide value as false to this attribute then container will not allow exception 
+implicit object into the present Jsp page.
+ The default value of this attribute is false.
+Ex: <%@page isErrorPage=”true”%>
+first.jsp:
+<%@page errorPage="error.jsp"%>
+<%
+java.util.Date d=null;
+out.println(d.toString());
+%>
+error.jsp:
+<%@page isErrorPage="true"%>
+<html>
+<body bgcolor="lightgreen">
+<center><b><font size="" color=""><br><br>
+<%=expression%>
+</font></b></center></body>
+</html>
+
+
+
+
+10. session: 
+It is a boolean attribute, it is give an intimation to the container about to allow or not to 
+allow session implicit object into the present Jsp page.The default value of this attribute is
+true.
+Ex: <%@page session=”true”%>
+
+
+11. isThreadSafe:
+ It is a boolean attribute, it can be used to give an intimation to the container about to 
+allow or not to allow multiple number of requests at a time into the present Jsp page.
+ If we provide true as value to this attribute then container will allow multiple number of 
+requests at a time.
+ If we provide false as value to this attribute then automatically container will allow only 
+one request at a time and it will implement SingleThreadModel interface in the translated 
+servlet.
+ The default value of this attribute is true.
+Ex: <%@page isThreadSafe=”true”%>
+
+
+12. isELIgnored:
+ It is a boolean attribute, it can be used to give an intimation to the container about to 
+allow or not to allow Expression Language syntaxes in the present Jsp page.
+Note: Expression Language is a Scripting language, it can be used to eliminate java code 
+completely from the Jsp pages.
+ If isELIgnored attribute value is true then container will eliminate Expression Language 
+syntaxes from the present Jsp page.
+ If we provide false as value to this attribute then container will allow Expression 
+Language syntaxes into the present Jsp pages.
+ The default value of this attribute is false.
+Ex: <%@page isELIgnored=”true”%>
+
+
+2. Include Directive:
+ Include Directive can be used to include the content of the target resource into the 
+present Jsp page.
+Syntax:<%@include file=”--”%>
+ Where file attribute can be used to specify the name and location of the target resource.
+ 
+logo.jsp
+logo.jsp:
+<html>
+<body><center>
+<table width="100%" height="20%" bgcolor="red">
+<tr><td colspan="2"><center><b><font size="7" color="white">
+Advance java tutorials
+</font></b></center></td></tr>
+</table></center></body>
+</html>
+footer.jsp:
+<html>
+<body><center>
+<table width="100%" height="15%" bgcolor="blue">
+<tr><td colspan="2"><center><b><font size="6" color="white">
+copyrights2010-2020@AdvancedJavaLearnings
+</font></b></center></td></tr>
+</table></center></body>
+</html> 
+
+body.jsp:
+<html>
+<body bgcolor="lightyellow">
+<center><b><font size="7">
+<p><br>
+ Hello All lets start learning JSPs.
+<br><br></p>
+</font></b></center></body>
+</html>
+
+
+mainpage.jsp:
+<%@include file="logo.jsp"%>
+<%@include file="body.jsp"%>
+<%@include file="footer.jsp"%>
+
+
+
+
+
+3. Taglib Directive:
+ The main purpose of Taglib Directive is to make available user defined tag library into 
+the present Jsp pages.
+Syntax:<%@taglib uri=”_ _” prefix=”_ _”%>
+ Where uri attribute can be used to specify the name and location of user defined tag 
+library.
+ Where prefix attribute can be used to define prefix names for the custom tags.
+Ex: <%@taglib uri=”/WEB-INF/db.tld” prefix=”connect”%>
+
+
+
+-------------------------------------------------------------------------------------------B
+
+B . JSP Scripting Elements
+
+
+
+-------------------------------------------------------------------------------------------B
+
+C. JSP Actions

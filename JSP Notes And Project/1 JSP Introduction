@@ -1,0 +1,141 @@
+JSP Introduction : 
+
+1. In web application development, servlets are very good at the time of pick up the request and process the request but servlets are not good at the time of generating dynamic 
+response to client.
+
+2. Servlet is a Thread based technology, if we deploy it at server then container will create a separate thread instead of the process for every request from the client.
+
+3. Due to this Thread based technology at server side server side application performance will be increased.
+ 
+4. In case of the servlet, we are unable to separate both presentation logic and business logic.
+
+5. If we perform any modifications on servlets then we must perform recompilation and 
+reloading.
+
+6. If we want to design web applications by using servlets then we must require very good  knowledge on Java technology.
+
+7. JSP is a server side technology provided by Sun Microsystems to design web applications  in order to generate dynamic response.
+
+8. The main intention to introduce Jsp technology is to reduce java code as much as possible in web applications.
+
+9. Jsp technology is a server side technology, it was designed on the basis of Servlet API 
+and Java API.
+
+10. In web application development, we will utilize Jsp technology to prepare view part or presentation part.
+
+11. Jsp technology is very good at the time of generating dynamic response to client with very good look and feel.
+
+12. If we want to design any web application with Jsp technology then it is not required to 
+have java knowledge.
+
+13. In case of Jsp technology, we are able to separate presentation logic and business logic because to prepare presentation logic we will use html tags and to prepare business logic we will use Jsp tags separately.
+
+14. If we perform any modifications on Jsp pages then it is not required to perform 
+recompilation and reloading because Jsp pages are auto-compiled and auto-loaded.
+
+
+
+JSP Deployment
+
+In web application development, it is possible to deploy the Jsp pages at any location of 
+the web application directory structure, but it is suggestible to deploy the Jsp pages under application folder.
+ If we deploy the Jsp pages under application folder i.e. public area then we are able to 
+access that Jsp page from client by using its name directly in the url.
+ If we deploy the Jsp pages under private area(WEB-INF, classes) then we must define url 
+pattern for the Jsp page in web.xml file and we are able to access that Jsp page by 
+specifying url pattern in client url.
+ To configure Jsp pages in web.xml file we have to use the following xml tags.
+<web-app>
+ ----------
+<servlet>
+<servlet-name>logical_name</servlet-name>
+<Jsp-file>context relative path of Jsp page</Jsp-file >
+</servlet>
+<servlet-mapping>
+<servlet-name>logical_name</servlet-name>
+<url-pattern>pattern_name</url-pattern>
+</servlet-mapping>
+ ---------- 
+</web-app>
+
+
+
+
+
+
+
+JSP LifeCycle
+
+1. Jsp Translation to Servlet
+2. Jsp Loading
+3. Jsp Parsing
+4. Servlet Compilation
+5. Servlet Loading
+6. Servlet Instantiation
+7. Servlet Initialization
+8. Request Processing ---> 8.A--> response
+9. Servlet Deinstantiation
+10. Servlet Unloading
+11. Jsp Unloading
+
+When we send request from client to server for a particular Jsp page then container will pick 
+up the request, identify the requested Jsp pages and perform the following life cycle actions.
+1. Jsp Loading:
+ Here container will load Jsp file to the memory from web application directory structure.
+2. Jsp Parsing:
+ Here container will check whether all the tags available in Jsp page are in well-formed 
+format or not.
+3. Jsp Translation to Servlet:
+ After the Jsp parsing container will translate the loaded Jsp page into a particular servlet.
+ While executing a Jsp page Tomcat container will provide the translated servlet in the 
+following location at Tomcat Server.
+ C;\Tomcat7.0\work\catalina\localhost\org\apache\Jsp\first_Jsp.java
+ If the Jsp file name is first.jsp then Tomcat Server will provide a servlet with name 
+first_jsp. By default all the translated servlets provided by Tomcat container are final.
+ The default super class for translated servlet is HttpJspBase.
+ 
+Where JspPage interface has declared the following methods.
+public void _JspInit()
+public void _JspDestroy() 
+Where HttpJspPage interface has provided the following method.
+public void _JspService(HttpServletRequest req, HttpServletResponse res)
+For the above 3 abstract methods HttpJspBase class has provided the default 
+implementation but _JspService(_,_) method would be overridden in first_jsp class with the 
+content what we provided in first.jsp file.
+
+
+4. Servlet Compilation:
+ After getting the translated servlet container will compile servlet java file and generates 
+the respective .class file.
+5. Servlet Loading:
+Here container will load the translated servlet class byte code to the memory.
+6. Servlet Instantiation:
+ Here container will create object for the loaded servlet.
+7. Servlet Initialization:
+Here container will access _JspInit() method to initialize the servlet.
+8. Creating request and response objects:
+ After the servlet initialization container will create a thread to access _JspService(_,_) 
+method, for this container has to create HttpServletRequest and HttpServletResponse.
+
+
+9. Generating Dynamic response:
+ After getting request and response objects container will access _JspService(_,_) 
+method, by executing its content container will generate some response on response object.
+10. Dispatching Dynamic response to Client:
+ When container generated thread reached to the ending point of _JspService(_,_) 
+method then that thread will be in Dead state, with this container will dispatch dynamic 
+response to client through the Response Format prepared by the protocol.
+11. Destroying request and response objects:
+ When the dynamic response reached to client protocol will terminate its virtual socket 
+connection, with this container will destroy request and response objects.
+
+
+12. Servlet Deinstantiation:
+ After destroying request and response objects container will be in waiting state depends 
+on the container, then container identifies no further request for the same resource then 
+container will destroy servlet object, for this container will execute _JspDestroy() method.
+13. Servlet Unloading and Jsp Unloading:
+ After the servlet deinstantiation container will eliminate the translated servlet byte code 
+and Jsp code from memory. 
+
+
